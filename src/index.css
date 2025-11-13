@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-slate-100 antialiased;
+  background-color: #020617;
+  background-image: radial-gradient(
+      ellipse at 18% 14%,
+      rgba(99, 102, 241, 0.24),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 78% 12%,
+      rgba(14, 165, 233, 0.2),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 46% 72%,
+      rgba(236, 72, 153, 0.2),
+      transparent 52%
+    ),
+    linear-gradient(120deg, rgba(2, 6, 23, 0.96), rgba(3, 7, 18, 0.92));
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.4);
+  color: #f8fafc;
+}
+
+.glass-card {
+  position: relative;
+  @apply border border-white/10 backdrop-blur-xl shadow-glow-md;
+  background: linear-gradient(
+    140deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(30, 41, 59, 0.75)
+  );
+}
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(99, 102, 241, 0.6),
+    rgba(56, 189, 248, 0.5)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.hover-underline:hover::after,
+.hover-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.card-3d {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(6deg) rotateY(-6deg);
+  box-shadow: 0 25px 60px -20px rgba(59, 130, 246, 0.15);
+}
+
+.card-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(99, 102, 241, 0.08),
+    rgba(56, 189, 248, 0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card-3d:hover::after {
+  opacity: 1;
+}
