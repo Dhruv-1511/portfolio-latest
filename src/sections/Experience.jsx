@@ -24,7 +24,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="relative scroll-mt-24">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <SectionHeading
           eyebrow="Experience"
           title="Delivering momentum across agencies and product teams."

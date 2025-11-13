@@ -212,7 +212,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               stiffness: 300,
               damping: 30,
             }}
-            className="fixed inset-4 z-50 mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/95 shadow-2xl backdrop-blur-2xl md:inset-8"
+            className="fixed inset-4 z-50 mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/95 shadow-2xl backdrop-blur-2xl md:inset-8"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

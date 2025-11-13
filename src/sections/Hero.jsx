@@ -34,7 +34,7 @@ const Hero = () => {
 
       <div className="absolute inset-0 -z-10 bg-grid-pattern bg-[length:48px_48px] opacity-10" />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.1fr,0.9fr] md:py-32">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-24 md:grid-cols-[1.1fr,0.9fr] md:py-32">
         <div className="relative flex flex-col gap-10">
           <motion.span
             initial={{ opacity: 0, y: 24 }}

@@ -23,7 +23,7 @@ const Footer = () => (
     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     className="relative mt-24 border-t border-white/10 bg-slate-950/80 py-12"
   >
-    <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 text-center md:flex-row md:items-center md:justify-between">
+    <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 text-center md:flex-row md:items-center md:justify-between">
       <div className="space-y-3">
         <p className="text-xs uppercase tracking-[0.45em] text-slate-400">
           Dhruv Sheladiya
