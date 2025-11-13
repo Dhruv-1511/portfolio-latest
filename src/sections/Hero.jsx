@@ -125,7 +125,7 @@ const Hero = () => {
           <ProfileCard
             name={personal.name}
             title={personal.role}
-            handle="johndoe"
+            handle="DhruvSheladiya"
             status="Online"
             contactText="Contact Me"
             avatarUrl={personal.photo}

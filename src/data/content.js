@@ -149,8 +149,8 @@ export const projects = [
 ];
 
 export const socials = [
-  { label: "GitHub", href: "htthttps://github.com/Dhruv-1511", handle: "@Dhruv-1511" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6", handle: "@john-doe" },
+  { label: "GitHub", href: "https://github.com/Dhruv-1511", handle: "@Dhruv-1511" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6", handle: "@dhruv" },
   { label: "Whatsapp", href: "https://wa.me/919510334996", handle: "+91 95103 34996" },
-  { label: "Instagram", href: "https://www.instagram.com/dhruv_sheladiya_", handle: "@dhruv_15_11_" },
+  { label: "Instagram", href: "https://www.instagram.com/dhruv_15_11_/", handle: "@dhruv_15_11_" },
 ];
