@@ -1,4 +1,5 @@
 import myImg from "../assets/myImg.jpg";
+import RedImg from "../assets/red-bg.png";
 import coinCapImage from "../assets/coin-cap.svg";
 import coinCapLogo from "../assets/coin-cap-logo.png";
 import porterImage from "../assets/porter.svg";
@@ -13,6 +14,7 @@ export const personal = {
   name: "Dhruv Sheladiya",
   role: "Frontend Developer — React.js Specialist",
   photo: myImg,
+  redImg: RedImg,
   summary:
     "I am a passionate frontend developer specializing in React.js, crafting snappy interfaces, immersive user journeys, and animation-rich experiences with modern tooling.",
   highlights: [

@@ -57,14 +57,14 @@ const InteractivePhoto = () => {
       <div className="relative overflow-hidden rounded-3xl border-2 border-white/10 bg-gradient-to-br from-slate-900/90 to-slate-950/90 p-4 shadow-2xl">
         {/* Photo Container */}
         <motion.div
-          className="relative aspect-[4/5] overflow-hidden rounded-2xl"
+          className="relative aspect-[13/15] overflow-hidden rounded-2xl"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.img
-            src={personal.photo}
+            src={personal.redImg}
             alt={`${personal.name} portrait`}
             className="h-full w-full object-cover"
             animate={{ scale: [1, 1.05, 1] }}
