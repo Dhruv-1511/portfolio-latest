@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -9,9 +10,9 @@ const links = [
 ];
 
 const socialIcons = [
-  { label: "GitHub", href: "https://github.com/", Icon: FiGithub },
+  { label: "GitHub", href: "https://github.com/Dhruv-1511", Icon: FiGithub },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6", Icon: FiLinkedin },
-  { label: "Twitter", href: "https://twitter.com/", Icon: FiTwitter },
+  { label: "Whatsapp", href: "https://wa.me/919510334996", Icon: FaWhatsapp },
 ];
 
 const Footer = () => (

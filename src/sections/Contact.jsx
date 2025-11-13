@@ -8,6 +8,7 @@ import {
   FiPhone,
   FiTwitter,
 } from "react-icons/fi";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import SectionHeading from "../components/SectionHeading";
 import { personal, socials } from "../data/content";
 
@@ -16,6 +17,8 @@ const iconMap = {
   LinkedIn: FiLinkedin,
   Twitter: FiTwitter,
   Dribbble: FiDribbble,
+  Instagram: FaInstagram,
+  Whatsapp: FaWhatsapp,
 };
 
 const Contact = () => {
@@ -175,7 +178,7 @@ const Contact = () => {
                         target="_blank"
                         rel="noreferrer"
                         whileHover={{ scale: 1.05, y: -2 }}
-                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-brand-500/40 hover:text-brand-300"
+                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-2 py-3 text-sm font-medium text-white transition hover:border-brand-500/40 hover:text-brand-300"
                       >
                         <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg text-brand-300 transition group-hover:border-brand-500/40 group-hover:text-brand-200">
                           <Icon />

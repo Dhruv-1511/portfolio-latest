@@ -12,7 +12,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onOpen(project)}
-      className="group relative h-[500px] cursor-pointer overflow-hidden rounded-3xl"
+      className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-3xl"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -23,7 +23,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
       <motion.div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(${project.image})`,
+          backgroundImage: `url(${project.logo})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -69,7 +69,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
         </div>
       </motion.div>
 
-      {project.logo ? (
+      {/* {project.logo ? (
         <motion.div
           className="absolute right-6 top-6 z-10"
           initial={{ opacity: 0, x: 20 }}
@@ -85,7 +85,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
             />
           </div>
         </motion.div>
-      ) : null}
+      ) : null} */}
 
       {/* Tech Tags - Top Right */}
       {/* <div className="absolute right-6 top-6 z-10 flex flex-col gap-2">
@@ -228,7 +228,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             {/* Scrollable Content */}
             <div className="h-full overflow-y-auto">
               {/* Hero Image Section */}
-              <div className="relative h-64 md:h-80">
+              <div className="relative w-full h-full">
                 <motion.div
                   className="absolute inset-0"
                   style={{
@@ -258,22 +258,9 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
                 {/* Floating Tech Tags */}
                 <div className="absolute right-8 top-8 flex flex-col gap-3">
-                  {project.stack.slice(0, 3).map((tech, techIndex) => (
-                    <motion.span
-                      key={tech}
-                      className="rounded-full border border-white/20 bg-slate-950/90 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-xl shadow-lg"
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + techIndex * 0.1 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </div>
-
                 {project.logo ? (
                   <motion.div
-                    className="absolute bottom-8 left-8"
+                    className=""
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
@@ -287,6 +274,9 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                     </div>
                   </motion.div>
                 ) : null}
+                </div>
+
+                
               </div>
 
               {/* Content Section */}
@@ -363,17 +353,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
                 >
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group/btn flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-md transition-all hover:border-brand-500/50 hover:bg-brand-500/20"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiGithub size={20} />
-                    <span>View Source Code</span>
-                  </motion.a>
+                 
                   <motion.a
                     href={project.demo}
                     target="_blank"

@@ -7,6 +7,7 @@ import skillzapImage from "../assets/skillzap.svg";
 import skillzapLogo from "../assets/skillzap-logo.png";
 import slashstarLogo from "../assets/slashstar.png";
 import madviseLogo from "../assets/madvise.png";
+import resumePdf from "../assets/dhruv_resume.pdf";
 
 export const personal = {
   name: "Dhruv Sheladiya",
@@ -29,8 +30,9 @@ export const personal = {
 export const heroCtas = [
   {
     label: "Download CV",
-    href: "#",
+    href: resumePdf,
     variant: "primary",
+    download: "Dhruv_Sheladiya_Resume.pdf",
   },
   {
     label: "Contact Me",
@@ -118,40 +120,37 @@ export const experiences = [
 
 export const projects = [
   {
-    title: "Coin Cap",
+    title: "Skillzap",
     description:
-      "Real-time crypto asset tracker featuring interactive charts, curated watchlists, and responsive dashboards.",
-    stack: ["React", "Tailwind", "Framer Motion"],
-    github: "#",
-    demo: "#",
-    image: coinCapImage,
-    logo: coinCapLogo,
+      "I developed Skillzap ai, an intelligent learning platform designed as a smart companion for students, professionals, and curious learners. Built with a modern, high-performance architecture, the platform uses AI-powered flashcards, trivia challenges, and real-time multiplayer battles to help users master any topic in an engaging way. Users can upload PowerPoint presentations, PDFs, or audio files, which are instantly converted into personalized learning decks using advanced AI processing. The platform also features seamless social authentication with Google, Apple, and Facebook login, along with integrated Google Ads for monetization. With a polished UI, fast performance, and dynamic gamification systems, Skillza delivers an interactive and customizable learning experience for both individuals and teams.",
+    stack: ["HTML", "CSS", "JavaScript", "React js", "Tailwind CSS", "Socket.io", "api"],
+    demo: "http://skillzapai.com/",
+    image: skillzapImage,
+    logo: skillzapLogo,
   },
   {
-    title: "Porter",
+    title: "PorterYachts",
     description:
-      "Logistics and delivery platform with intelligent routing, driver insights, and sleek mobile-first interfaces.",
-    stack: ["Next.js", "TypeScript", "Tailwind"],
-    github: "#",
-    demo: "#",
+      "I built a high-performance, SEO-optimized Next.js website for a luxury yacht booking company. The platform allows users to explore and book premium yachts with an elegant, modern UI and fast server-side rendering for improved search visibility. I implemented an advanced multi-filter system enabling users to refine yachts by Location, Duration, Length, Price, and Amenities, ensuring a smooth and intuitive browsing experience. The site is fully responsive, optimized for speed, and designed to showcase luxury yacht listings in a visually appealing and user-centric way.",
+    stack: ["HTML", "CSS", "JavaScript", "Formik", "Tailwind CSS"],
+    demo: "https://porteryachts.com/",
     image: porterImage,
     logo: porterLogo,
   },
   {
-    title: "Skillzap",
+    title: "Coin Cap",
     description:
-      "Learning management hub enabling adaptive lessons, team leaderboards, and gamified certifications.",
-    stack: ["Next.js", "Framer Motion", "GSAP"],
-    github: "#",
-    demo: "#",
-    image: skillzapImage,
-    logo: skillzapLogo,
+      "I developed a fully responsive cryptocurrency market tracking web application using React and Tailwind CSS for a freelance client. The platform presents real-time data for 100+ cryptocurrencies, showcasing live price updates, market capitalization, trading volume, and other key market indicators. To enhance usability, I implemented an optimized advanced search system capable of filtering and locating coins with less than 1-second query time, ensuring a seamless and efficient user experience. The project focuses on performance, clean UI, and accurate data visualization to help users monitor the crypto market effortlessly.",
+    stack: ["HTML", "CSS", "JavaScript", "React js", "Tailwind CSS", "api"],
+    demo: "https://coin-cap-eight.vercel.app/",
+    image: coinCapImage,
+    logo: coinCapLogo,
   },
 ];
 
 export const socials = [
-  { label: "GitHub", href: "https://github.com/", handle: "@johndoe" },
+  { label: "GitHub", href: "htthttps://github.com/Dhruv-1511", handle: "@Dhruv-1511" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6", handle: "@john-doe" },
-  { label: "Twitter", href: "https://twitter.com/", handle: "@john_doe" },
-  { label: "Dribbble", href: "https://dribbble.com/", handle: "@john-doe" },
+  { label: "Whatsapp", href: "https://wa.me/919510334996", handle: "+91 95103 34996" },
+  { label: "Instagram", href: "https://www.instagram.com/dhruv_sheladiya_", handle: "@dhruv_15_11_" },
 ];
