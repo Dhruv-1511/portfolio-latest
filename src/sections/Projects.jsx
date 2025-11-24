@@ -258,25 +258,23 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
                 {/* Floating Tech Tags */}
                 <div className="absolute right-8 top-8 flex flex-col gap-3">
-                {project.logo ? (
-                  <motion.div
-                    className=""
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-slate-950/80 p-3 shadow-2xl backdrop-blur-xl">
-                      <img
-                        src={project.logo}
-                        alt={`${project.title} logo`}
-                        className="h-full w-full object-contain"
-                      />
-                    </div>
-                  </motion.div>
-                ) : null}
+                  {project.logo ? (
+                    <motion.div
+                      className=""
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-slate-950/80 p-3 shadow-2xl backdrop-blur-xl">
+                        <img
+                          src={project.logo}
+                          alt={`${project.title} logo`}
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+                    </motion.div>
+                  ) : null}
                 </div>
-
-                
               </div>
 
               {/* Content Section */}
@@ -353,7 +351,6 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
                 >
-                 
                   <motion.a
                     href={project.demo}
                     target="_blank"

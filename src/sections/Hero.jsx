@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FaFigma, FaGithub, FaReact } from "react-icons/fa";
-import { SiFramer, SiTailwindcss } from "react-icons/si";
+import { SiFramer, SiJavascript, SiTailwindcss } from "react-icons/si";
+import { RiNextjsFill } from "react-icons/ri";
 import PrimaryButton from "../components/PrimaryButton";
 import ParallaxShapes from "../components/ParallaxShapes";
 import ProfileCard from "../components/ProfileCard";
@@ -9,10 +10,11 @@ import { heroCtas, personal } from "../data/content";
 
 const floatingIcons = [
   { icon: <FaReact />, color: "text-cyan-400", delay: 0 },
-  { icon: <SiTailwindcss />, color: "text-sky-300", delay: 0.2 },
-  { icon: <SiFramer />, color: "text-purple-300", delay: 0.45 },
-  { icon: <FaFigma />, color: "text-pink-300", delay: 0.6 },
-  { icon: <FaGithub />, color: "text-slate-100", delay: 0.8 },
+  { icon: <RiNextjsFill />, color: "text-white", delay: 0.1 },
+  { icon: <SiTailwindcss />, color: "text-yellow", delay: 0.3 },
+  { icon: <SiFramer />, color: "text-purple-300", delay: 0.5 },
+  { icon: <SiJavascript />, color: "text-yellow-400", delay: 0.7 },
+  { icon: <FaGithub />, color: "text-slate-100", delay: 0.9 },
 ];
 
 const Hero = () => {
@@ -141,15 +143,15 @@ const Hero = () => {
                 key={index}
                 className={`absolute flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md text-2xl ${item.color}`}
                 style={{
-                  top: `${20 + index * 15}%`,
+                  top: `${1 + index * 15}%`,
                   right: index % 2 === 0 ? "-12%" : "auto",
                   left: index % 2 !== 0 ? "-12%" : "auto",
                 }}
                 initial={{ y: 0 }}
-                animate={{ y: [-10, 10, -10] }}
+                animate={{ y: [-20, 20, -20], rotate: [0, 10, -10, 0] }}
                 transition={{
                   delay: item.delay,
-                  duration: 4 + index,
+                  duration: 5 + index,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}

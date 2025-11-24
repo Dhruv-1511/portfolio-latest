@@ -147,7 +147,7 @@ const Navbar = () => {
 
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <motion.a
-            href="#home"
+            href=""
             className="group relative flex items-center gap-4 text-lg font-semibold tracking-tight text-white"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
