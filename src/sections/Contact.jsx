@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import SectionHeading from "../components/SectionHeading";
-import { personal, socials } from "../data/content";
+import { useContentfulData } from "../context/ContentfulContext";
 
 const iconMap = {
   GitHub: FiGithub,
@@ -22,12 +22,18 @@ const iconMap = {
 };
 
 const Contact = () => {
+  const { content } = useContentfulData();
+  const { personal, socials } = content;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+
+  if (!personal || !socials || socials.length === 0) {
+    return null;
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -169,12 +175,12 @@ const Contact = () => {
                   Social Reach
                 </p>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  {socials.map((social) => {
-                    const Icon = iconMap[social.label] ?? FiLinkedin;
+                  {socials?.map((social) => {
+                    const Icon = iconMap[social?.label] ?? FiLinkedin;
                     return (
                       <motion.a
-                        key={social.label}
-                        href={social.href}
+                        key={social?.label}
+                        href={social?.href}
                         target="_blank"
                         rel="noreferrer"
                         whileHover={{ scale: 1.05, y: -2 }}
@@ -185,10 +191,10 @@ const Contact = () => {
                         </span>
                         <div>
                           <p className="text-xs uppercase tracking-[0.4em] text-slate-400">
-                            {social.label}
+                            {social?.label}
                           </p>
                           <p className="text-sm font-semibold text-white">
-                            {social.handle}
+                            {social?.handle}
                           </p>
                         </div>
                       </motion.a>

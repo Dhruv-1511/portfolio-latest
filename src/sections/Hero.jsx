@@ -6,7 +6,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import ParallaxShapes from "../components/ParallaxShapes";
 import ProfileCard from "../components/ProfileCard";
 import ScrambledText from "../components/ScrambledText";
-import { heroCtas, personal } from "../data/content";
+import { useContentfulData } from "../context/ContentfulContext";
 
 const floatingIcons = [
   { icon: <FaReact />, color: "text-cyan-400", delay: 0 },
@@ -18,6 +18,13 @@ const floatingIcons = [
 ];
 
 const Hero = () => {
+  const { content } = useContentfulData();
+  const { personal, heroCtas } = content;
+
+  if (!personal || !heroCtas || heroCtas.length === 0) {
+    return null;
+  }
+
   const greeting = `Hi, I'm ${personal.name}`;
 
   const handleContactClick = () => {
@@ -60,7 +67,7 @@ const Hero = () => {
             >
               <ScrambledText
                 text={greeting}
-                duration={2000}
+                duration={1000}
                 className="whitespace-pre-wrap"
               />
             </motion.h1>

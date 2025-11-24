@@ -6,6 +6,7 @@ import {
   useSpring,
   useMotionValue,
   useTransform,
+  useAnimation,
 } from "framer-motion";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 
@@ -23,6 +24,7 @@ const Navbar = () => {
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const logoControls = useAnimation();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -152,13 +154,21 @@ const Navbar = () => {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleLinkClick("home")}
+            onHoverStart={() => {
+              logoControls.start({
+                rotate: [0, -8, 8, -8, 0],
+                transition: { duration: 0.6, ease: "easeInOut" },
+              });
+            }}
+            onHoverEnd={() => {
+              logoControls.start({
+                rotate: 0,
+                transition: { duration: 0.3, ease: "easeInOut" },
+              });
+            }}
           >
             {/* Logo Container with Enhanced Styling */}
-            <motion.div
-              className="relative"
-              whileHover={{ rotate: [0, -8, 8, -8, 0] }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div className="relative" animate={logoControls}>
               {/* Outer Glow */}
               <motion.div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-brand-500 via-indigo-500 to-sky-400 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40" />
 

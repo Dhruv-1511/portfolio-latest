@@ -11,9 +11,9 @@ import {
   FiCoffee,
 } from "react-icons/fi";
 import SectionHeading from "../components/SectionHeading";
-import { personal } from "../data/content";
+import { useContentfulData } from "../context/ContentfulContext";
 
-const InteractivePhoto = () => {
+const InteractivePhoto = ({ personal }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -42,6 +42,8 @@ const InteractivePhoto = () => {
     x.set(0);
     y.set(0);
   };
+
+  if (!personal) return null;
 
   return (
     <motion.div
@@ -151,6 +153,13 @@ const StoryCard = ({ title, content, icon: Icon, index, gradient }) => {
 };
 
 const About = () => {
+  const { content } = useContentfulData();
+  const { personal } = content;
+
+  if (!personal) {
+    return null;
+  }
+
   const storyCards = [
     {
       title: "My Journey",
@@ -210,7 +219,7 @@ const About = () => {
           {/* Left Column - Photo & Quick Facts */}
           <div className="space-y-8">
             {/* Interactive Photo */}
-            <InteractivePhoto />
+            <InteractivePhoto personal={personal} />
 
             {/* Quick Facts - Horizontal Layout */}
             {/* <motion.div

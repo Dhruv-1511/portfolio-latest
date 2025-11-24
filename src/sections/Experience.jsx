@@ -2,25 +2,35 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { FiBriefcase, FiMapPin } from "react-icons/fi";
 import SectionHeading from "../components/SectionHeading";
-import { experiences, personal } from "../data/content";
+import { useContentfulData } from "../context/ContentfulContext";
 
 const Experience = () => {
+  const { content } = useContentfulData();
+  const { experiences, personal } = content;
   const timelineRef = useRef(null);
+
+  // All hooks must be called before any conditional returns
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start 0.6", "end 0.3"],
+    layoutEffect: false,
   });
 
-  const easedProgress = useSpring(scrollYProgress, {
+  const easedProgress = useSpring(scrollYProgress || 0, {
     stiffness: 120,
     damping: 24,
     mass: 0.6,
   });
 
   const indicatorOffset = useTransform(easedProgress, (value) => {
-    const percentage = Math.min(Math.max(value, 0), 1) * 100;
+    const percentage = Math.min(Math.max(value || 0, 0), 1) * 100;
     return `calc(${percentage}% - 1.125rem)`;
   });
+
+  // Now we can do conditional returns after all hooks
+  if (!experiences || !personal || experiences.length === 0) {
+    return null;
+  }
 
   return (
     <section id="experience" className="relative scroll-mt-24">
@@ -118,27 +128,30 @@ const Experience = () => {
             ))}
           </div>
 
-          <div className="pointer-events-none absolute inset-y-9 left-[calc(32%_-_1rem)] hidden w-8 md:flex">
-            <div className="relative h-full w-full">
-              <div className="absolute inset-0 left-1/2 hidden h-full w-1.5 -translate-x-1/2 rounded-full bg-slate-800/80 shadow-[inset_0_2px_4px_rgba(15,23,42,0.35)] md:block" />
-              <motion.div
-                className="absolute inset-0 left-1/2 hidden h-full w-1.5 -translate-x-1/2 origin-top rounded-full bg-gradient-to-b from-pink-500 via-indigo-500 to-sky-400 md:block"
-                style={{ scaleY: easedProgress }}
-              />
-              <motion.div
-                className="absolute left-1/2 hidden -translate-x-1/2 md:flex"
-                style={{ top: indicatorOffset }}
-              >
-                <div className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/40 bg-slate-900 shadow-lg shadow-indigo-900/30">
-                  <img
-                    src={personal.photo}
-                    alt="Timeline avatar"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </motion.div>
+          {/* Timeline Indicator - Only render when data is loaded */}
+          {personal && experiences && experiences.length > 0 && (
+            <div className="pointer-events-none absolute inset-y-9 left-[calc(32%_-_1rem)] hidden w-8 md:flex">
+              <div className="relative h-full w-full">
+                <div className="absolute inset-0 left-1/2 hidden h-full w-1.5 -translate-x-1/2 rounded-full bg-slate-800/80 shadow-[inset_0_2px_4px_rgba(15,23,42,0.35)] md:block" />
+                <motion.div
+                  className="absolute inset-0 left-1/2 hidden h-full w-1.5 -translate-x-1/2 origin-top rounded-full bg-gradient-to-b from-pink-500 via-indigo-500 to-sky-400 md:block"
+                  style={{ scaleY: easedProgress }}
+                />
+                <motion.div
+                  className="absolute left-1/2 hidden -translate-x-1/2 md:flex"
+                  style={{ top: indicatorOffset }}
+                >
+                  <div className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/40 bg-slate-900 shadow-lg shadow-indigo-900/30">
+                    <img
+                      src={personal.photo}
+                      alt="Timeline avatar"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

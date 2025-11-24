@@ -107,13 +107,7 @@ export const experiences = [
     accent: "#06b6d4",
     location: "Surat, India",
     workMode: "On-site",
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React js",
-      "Git",
-    ],
+    skills: ["HTML", "CSS", "JavaScript", "React js", "Git"],
     achievements: [
       "Developed a responsive and user-friendly website for Madvise Infotech.",
     ],
@@ -125,7 +119,15 @@ export const projects = [
     title: "Skillzap",
     description:
       "I developed Skillzap ai, an intelligent learning platform designed as a smart companion for students, professionals, and curious learners. Built with a modern, high-performance architecture, the platform uses AI-powered flashcards, trivia challenges, and real-time multiplayer battles to help users master any topic in an engaging way. Users can upload PowerPoint presentations, PDFs, or audio files, which are instantly converted into personalized learning decks using advanced AI processing. The platform also features seamless social authentication with Google, Apple, and Facebook login, along with integrated Google Ads for monetization. With a polished UI, fast performance, and dynamic gamification systems, Skillza delivers an interactive and customizable learning experience for both individuals and teams.",
-    stack: ["HTML", "CSS", "JavaScript", "React js", "Tailwind CSS", "Socket.io", "api"],
+    stack: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React js",
+      "Tailwind CSS",
+      "Socket.io",
+      "api",
+    ],
     demo: "http://skillzapai.com/",
     image: skillzapImage,
     logo: skillzapLogo,
@@ -151,8 +153,24 @@ export const projects = [
 ];
 
 export const socials = [
-  { label: "GitHub", href: "https://github.com/Dhruv-1511", handle: "@Dhruv-1511" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6", handle: "@dhruv" },
-  { label: "Whatsapp", href: "https://wa.me/919510334996", handle: "+91 95103 34996" },
-  { label: "Instagram", href: "https://www.instagram.com/dhruv_15_11_/", handle: "@dhruv_15_11_" },
+  {
+    label: "GitHub",
+    href: "https://github.com/Dhruv-1511",
+    handle: "@Dhruv-1511",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/dhruv-sheladiya-a350582a6",
+    handle: "@dhruv",
+  },
+  {
+    label: "Whatsapp",
+    href: "https://wa.me/919510334996",
+    handle: "+91 95103 34996",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/dhruv_15_11_/",
+    handle: "@dhruv_15_11_",
+  },
 ];

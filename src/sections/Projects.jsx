@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiExternalLink, FiGithub, FiArrowUpRight, FiX } from "react-icons/fi";
 import SectionHeading from "../components/SectionHeading";
-import { projects } from "../data/content";
+import { useContentfulData } from "../context/ContentfulContext";
 
 const ProjectCard = ({ project, index, onOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -185,7 +185,7 @@ const ProjectCard = ({ project, index, onOpen }) => {
   );
 };
 
-const ProjectModal = ({ project, isOpen, onClose }) => {
+const ProjectModal = ({ project, projects, isOpen, onClose }) => {
   if (!project) return null;
 
   return (
@@ -251,7 +251,11 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                 >
                   <div className="flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-brand-500/50 bg-slate-950/90 backdrop-blur-xl shadow-2xl">
                     <span className="text-3xl font-bold text-brand-300">
-                      {String(projects.indexOf(project) + 1).padStart(2, "0")}
+                      {String(
+                        (projects && Array.isArray(projects)
+                          ? projects.indexOf(project)
+                          : 0) + 1
+                      ).padStart(2, "0")}
                     </span>
                   </div>
                 </motion.div>
@@ -381,8 +385,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 };
 
 const Projects = () => {
+  const { content } = useContentfulData();
+  const { projects } = content;
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!projects || projects.length === 0) {
+    return null;
+  }
 
   const handleOpenModal = (project) => {
     setSelectedProject(project);
@@ -420,6 +430,7 @@ const Projects = () => {
         {/* Project Modal */}
         <ProjectModal
           project={selectedProject}
+          projects={projects}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
         />
