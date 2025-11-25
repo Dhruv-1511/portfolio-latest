@@ -25,45 +25,47 @@ const ParticlesBackground = () => {
         events: {
           onClick: {
             enable: true,
-            mode: "push",
+            mode: "repulse",
           },
           onHover: {
             enable: true,
-            mode: "grab",
+            mode: "bubble",
           },
           resize: true,
         },
         modes: {
-          push: {
-            quantity: 4,
+          repulse: {
+            distance: 200,
+            duration: 0.4,
           },
-          grab: {
-            distance: 140,
-            links: {
-              opacity: 0.5,
-            },
+          bubble: {
+            distance: 200,
+            size: 6,
+            duration: 2,
+            opacity: 0.8,
+            color: "#FFD700", // Gold on hover
           },
         },
       },
       particles: {
         color: {
-          value: "#6366f1", // Indigo-500 to match brand
+          value: ["#EC1D24", "#FFD700", "#ffffff"], // Red, Gold, White
         },
         links: {
-          color: "#6366f1",
+          color: "#FFD700",
           distance: 150,
           enable: true,
-          opacity: 0.2,
+          opacity: 0.1,
           width: 1,
         },
         move: {
-          direction: "top", // Antigravity feel
+          direction: "top", // Embers rising
           enable: true,
           outModes: {
             default: "out",
           },
-          random: false,
-          speed: 1.5,
+          random: true,
+          speed: 1,
           straight: false,
         },
         number: {
@@ -71,10 +73,16 @@ const ParticlesBackground = () => {
             enable: true,
             area: 800,
           },
-          value: 60,
+          value: 80,
         },
         opacity: {
-          value: 0.3,
+          value: { min: 0.1, max: 0.5 },
+          animation: {
+            enable: true,
+            speed: 1,
+            minimumValue: 0.1,
+            sync: false,
+          },
         },
         shape: {
           type: "circle",

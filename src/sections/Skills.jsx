@@ -11,7 +11,6 @@ const Skills = () => {
   }
 
   return (
-    
     <section id="skills" className="relative scroll-mt-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <SectionHeading

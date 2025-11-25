@@ -98,7 +98,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm md:hidden"
             onClick={() => setMenuOpen(false)}
           />
         )}
@@ -110,40 +110,18 @@ const Navbar = () => {
         animate="visible"
         className="fixed top-0 left-0 z-50 w-full"
         style={{
-          backgroundColor: scrolled ? "rgba(2, 6, 23, 0.85)" : "transparent",
+          backgroundColor: scrolled ? "rgba(21, 21, 21, 0.95)" : "transparent",
           backdropFilter: scrolled ? `blur(${headerBlur}px)` : "none",
+          borderBottom: scrolled ? "1px solid #EC1D24" : "none",
         }}
       >
-        {/* Animated Background Gradient */}
-        {scrolled && (
-          <motion.div
-            className="absolute inset-0 -z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.7) 100%)",
-            }}
-          />
-        )}
-
-        {/* Border with gradient */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-px"
-          style={{
-            background: scrolled
-              ? "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent)"
-              : "transparent",
-          }}
-        />
-
         {/* Scroll Progress Indicator */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 origin-left"
+          className="absolute bottom-0 left-0 right-0 h-1 origin-left z-50"
           style={{
             scaleX,
-            background: "linear-gradient(90deg, #6366f1, #8b5cf6, #38bdf8)",
-            boxShadow: "0 0 10px rgba(99, 102, 241, 0.5)",
+            background: "#EC1D24",
+            boxShadow: "0 0 10px #EC1D24",
           }}
         />
 
@@ -156,18 +134,12 @@ const Navbar = () => {
             onClick={() => handleLinkClick("home")}
             onHoverStart={() => {
               logoControls.start({
-                rotate: [0, -8, 8, -8, 0],
-                transition: { duration: 0.6, ease: "easeInOut" },
-              });
-            }}
-            onHoverEnd={() => {
-              logoControls.start({
-                rotate: 0,
-                transition: { duration: 0.3, ease: "easeInOut" },
+                rotate: [0, -5, 5, -5, 0],
+                transition: { duration: 0.4, ease: "easeInOut" },
               });
             }}
           >
-            {/* Logo Container with Enhanced Styling */}
+            {/* Marvel Style Logo */}
             <motion.div className="relative" animate={logoControls}>
               {/* Outer Glow */}
               <motion.div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-brand-500 via-indigo-500 to-sky-400 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40" />
@@ -207,17 +179,11 @@ const Navbar = () => {
             </motion.div>
 
             {/* Text Content */}
-            <div className="flex flex-col leading-tight">
-              <motion.span
-                className="text-xs font-medium uppercase tracking-[0.35em] text-slate-400 transition-colors group-hover:text-brand-300"
-                whileHover={{ x: 2 }}
-              >
+            <div className="flex flex-col leading-none">
+              <motion.span className="text-xs font-bold uppercase tracking-[0.2em] text-marvel-red">
                 Portfolio
               </motion.span>
-              <motion.span
-                className="text-base font-bold text-white transition-colors group-hover:bg-gradient-to-r group-hover:from-brand-300 group-hover:via-indigo-300 group-hover:to-sky-300 group-hover:bg-clip-text group-hover:text-transparent"
-                whileHover={{ x: 2 }}
-              >
+              <motion.span className="text-xl font-oswald font-bold text-white uppercase tracking-wide">
                 Dhruv Sheladiya
               </motion.span>
             </div>
@@ -232,60 +198,18 @@ const Navbar = () => {
                   key={link.id}
                   type="button"
                   onClick={() => handleLinkClick(link.id)}
-                  className="group relative px-4 py-2.5 text-sm font-medium uppercase tracking-[0.25em]"
+                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-widest font-oswald text-slate-300 hover:text-white transition-colors"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  whileHover={{ y: -2 }}
                 >
-                  {/* Active Indicator with glow */}
-                  {isActive && (
-                    <>
-                      <motion.div
-                        className="absolute inset-0 rounded-xl border border-brand-500/40 bg-brand-500/10 backdrop-blur-sm"
-                        layoutId="activeNav"
-                        initial={false}
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
-                      />
-                      <motion.div
-                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-500/20 via-indigo-500/20 to-sky-400/20 blur-sm"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: [0, 0.5, 0] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    </>
-                  )}
+                  {link.label}
 
-                  {/* Hover Background */}
-                  <motion.div
-                    className="absolute inset-0 rounded-xl bg-white/5 opacity-0 transition-opacity"
-                    whileHover={{ opacity: 1 }}
-                  />
-
-                  {/* Text with gradient on active */}
+                  {/* Active/Hover Underline */}
                   <span
-                    className={`relative z-10 block transition-all ${
-                      isActive
-                        ? "bg-gradient-to-r from-brand-300 via-indigo-300 to-sky-300 bg-clip-text text-transparent"
-                        : "text-slate-300 group-hover:text-white"
+                    className={`absolute bottom-0 left-0 h-0.5 bg-marvel-red transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
-                  >
-                    {link.label}
-                  </span>
-
-                  {/* Bottom accent line on hover */}
-                  <motion.div
-                    className="absolute bottom-0 left-1/2 h-0.5 w-0 origin-center bg-gradient-to-r from-brand-500 to-sky-400"
-                    whileHover={{ width: "60%", x: "-50%" }}
-                    transition={{ duration: 0.3 }}
                   />
                 </motion.button>
               );
@@ -295,38 +219,28 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <motion.button
             type="button"
-            className="relative flex items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2.5 text-slate-200 transition-all hover:border-brand-500/40 hover:bg-white/10 hover:text-white md:hidden"
+            className="relative flex items-center justify-center p-2 text-white md:hidden"
             onClick={() => setMenuOpen((prev) => !prev)}
-            whileHover={{ scale: 1.05, rotate: 5 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
           >
-            {/* Ripple effect */}
-            <motion.div
-              className="absolute inset-0 rounded-xl bg-brand-500/20"
-              animate={menuOpen ? { scale: 1.5, opacity: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            />
-
             <AnimatePresence mode="wait">
               {menuOpen ? (
                 <motion.div
                   key="close"
-                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.2, type: "spring" }}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
                 >
-                  <HiX size={22} />
+                  <HiX size={28} className="text-marvel-red" />
                 </motion.div>
               ) : (
                 <motion.div
                   key="menu"
-                  initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.2, type: "spring" }}
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
                 >
-                  <HiOutlineMenu size={22} />
+                  <HiOutlineMenu size={28} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -337,61 +251,28 @@ const Navbar = () => {
         <AnimatePresence>
           {menuOpen && (
             <motion.nav
-              initial={{ height: 0, opacity: 0, y: -20 }}
-              animate={{ height: "auto", opacity: 1, y: 0 }}
-              exit={{ height: 0, opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="mx-6 mb-4 overflow-hidden rounded-2xl border border-white/10 bg-slate-900/95 backdrop-blur-2xl shadow-2xl md:hidden"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="bg-marvel-black border-t-2 border-marvel-red md:hidden"
             >
-              {/* Menu header gradient */}
-              <div className="h-1 bg-gradient-to-r from-brand-500 via-indigo-500 to-sky-400" />
-
-              <div className="flex flex-col divide-y divide-white/5">
+              <div className="flex flex-col p-6 space-y-4">
                 {navLinks.map((link, index) => {
                   const isActive = active === link.id;
                   return (
                     <motion.button
                       key={link.id}
                       type="button"
-                      className={`relative px-6 py-4 text-left text-sm font-semibold uppercase tracking-[0.3em] transition-all ${
-                        isActive
-                          ? "text-brand-300"
-                          : "text-slate-200 hover:text-white"
+                      className={`text-left text-lg font-bold uppercase tracking-widest font-oswald ${
+                        isActive ? "text-marvel-red" : "text-white"
                       }`}
                       onClick={() => handleLinkClick(link.id)}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05, type: "spring" }}
-                      whileHover={{
-                        x: 6,
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                      }}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.05 }}
                     >
-                      {/* Active indicator */}
-                      {isActive && (
-                        <motion.div
-                          className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-500 to-sky-400"
-                          layoutId="activeMobileNav"
-                          initial={false}
-                        />
-                      )}
-
-                      {/* Number indicator */}
-                      <span className="absolute left-6 top-1/2 -translate-y-1/2 text-xs font-bold text-brand-500/30">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <span className="relative z-10 ml-8 block">
-                        {link.label}
-                      </span>
-
-                      {/* Hover arrow */}
-                      <motion.span
-                        className="absolute right-6 top-1/2 -translate-y-1/2 text-brand-400 opacity-0 transition-opacity"
-                        whileHover={{ opacity: 1, x: -4 }}
-                      >
-                        →
-                      </motion.span>
+                      {link.label}
                     </motion.button>
                   );
                 })}

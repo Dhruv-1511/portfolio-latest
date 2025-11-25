@@ -62,32 +62,44 @@ const ProfileCard = ({
       className="relative mx-auto max-w-sm"
     >
       <motion.div
-        animate={{ rotate: [0, 4, -3, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -inset-6 rounded-[2.5rem] border border-brand-500/20 bg-white/[0.04] backdrop-blur-xl"
+        animate={{ rotate: [0, 2, -2, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -inset-4 border-2 border-marvel-blue/30 bg-marvel-blue/5"
+        style={{
+          clipPath: "polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%)",
+        }}
       />
 
       <motion.div
         whileHover={{ y: -6 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-950/92 via-slate-900/60 to-slate-900/40 shadow-2xl"
+        className="relative z-10 flex flex-col overflow-hidden border-2 border-marvel-blue bg-gray-900 shadow-[0_0_30px_rgba(0,120,242,0.2)]"
         style={{
           transformStyle: "preserve-3d",
+          clipPath: "polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%)",
         }}
       >
-        <div className="relative aspect-[4/3] overflow-hidden">
+        {/* S.H.I.E.L.D. Header */}
+        <div className="bg-marvel-blue px-4 py-2 flex justify-between items-center">
+          <span className="text-xs font-bold text-white tracking-widest">
+            S.H.I.E.L.D. ID
+          </span>
+          <span className="text-xs font-mono text-white/80">LVL. 7</span>
+        </div>
+
+        <div className="relative aspect-[4/3] overflow-hidden border-b-2 border-marvel-blue">
           {avatarUrl ? (
             <motion.img
               src={avatarUrl}
               alt={name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               initial={{ scale: 1.05 }}
               animate={{ scale: 1 }}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950">
+            <div className="flex h-full w-full items-center justify-center bg-gray-800">
               <span className="text-4xl font-semibold text-white">
                 {name
                   .split(" ")
@@ -96,44 +108,46 @@ const ProfileCard = ({
               </span>
             </div>
           )}
+
+          {/* Holographic Overlay */}
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-marvel-blue/50 to-transparent opacity-40 pointer-events-none" />
+
+          {/* Scan Line */}
           <motion.div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-indigo-500/25 via-transparent to-sky-400/25"
-            animate={{ opacity: [0.3, 0.55, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0 h-1 bg-marvel-blue/50 shadow-[0_0_10px_#0078F2]"
+            animate={{ top: ["0%", "100%", "0%"] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
         </div>
 
         {showUserInfo && (
           <div
-            className="relative p-4"
+            className="relative p-6 bg-gray-900"
             style={{ transform: "translateZ(20px)" }}
           >
-            <div className="mb-3">
-              <h3 className="text-xl font-semibold text-white">{name}</h3>
-              <p className="mt-1 text-sm text-slate-300">{title}</p>
-              {handle && (
-                <p className="mt-1 text-xs uppercase tracking-[0.4em] text-slate-400">
-                  @{handle}
-                </p>
-              )}
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold text-white font-oswald uppercase tracking-wide">
+                {name}
+              </h3>
+              <p className="mt-1 text-sm text-marvel-blue font-mono uppercase">
+                {title}
+              </p>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-gray-400">
+                CODENAME: @DHRUV_15_11
+              </p>
             </div>
 
-            <div className="mb-3 flex items-center gap-2">
+            <div className="mb-4 flex items-center gap-2 border-t border-gray-700 pt-2">
               <motion.span
                 className={`h-2 w-2 rounded-full ${
-                  status === "Online"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-400"
-                    : "bg-slate-500"
-                } shadow-glow-md`}
-                animate={
-                  status === "Online"
-                    ? { opacity: [0.6, 1, 0.6], scale: [1, 1.1, 1] }
-                    : {}
-                }
-                transition={{ duration: 2, repeat: Infinity }}
+                  status === "Online" ? "bg-green-500" : "bg-red-500"
+                } shadow-[0_0_10px_currentColor]`}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1, repeat: Infinity }}
               />
-              <span className="text-xs uppercase tracking-[0.35em] text-slate-400">
-                {status}
+              <span className="text-xs uppercase tracking-[0.2em] text-gray-300 font-bold">
+                STATUS: {status === "Online" ? "ACTIVE" : "OFFLINE"}
               </span>
             </div>
 
@@ -142,7 +156,7 @@ const ProfileCard = ({
                 onClick={onContactClick}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-gradient-to-r from-brand-500/20 via-indigo-500/20 to-sky-400/20 px-3 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-white transition-all hover:border-brand-500/40 hover:bg-gradient-to-r hover:from-brand-500/25 hover:via-indigo-500/25 hover:to-sky-400/25"
+                className="flex w-full items-center justify-center gap-2 bg-marvel-blue/20 border border-marvel-blue text-marvel-blue px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:bg-marvel-blue hover:text-white clip-path-slant"
               >
                 <FiMail size={14} />
                 {contactText}

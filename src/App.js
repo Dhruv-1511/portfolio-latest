@@ -16,34 +16,21 @@ import { useContentfulData } from "./context/ContentfulContext";
 const App = () => {
   const { loading: isLoading } = useContentfulData();
   const [showLoader, setShowLoader] = useState(true);
-  const [minLoadTimeElapsed, setMinLoadTimeElapsed] = useState(false);
 
-  // Track minimum loading time (3 seconds)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMinLoadTimeElapsed(true);
-    }, 1300);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // Only hide loader when both conditions are met:
-    // 1. Data is loaded (!isLoading)
-    // 2. Minimum 3 seconds have passed
-    if (!isLoading && minLoadTimeElapsed) {
-      // Add a small delay for smooth transition
-      const timer = setTimeout(() => {
-        setShowLoader(false);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading, minLoadTimeElapsed]);
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+  };
 
   return (
     <>
       <AnimatePresence mode="wait">
-        {showLoader && <Loader key="loader" />}
+        {showLoader && (
+          <Loader
+            key="loader"
+            isLoading={isLoading}
+            onComplete={handleLoaderComplete}
+          />
+        )}
       </AnimatePresence>
 
       {!showLoader && (

@@ -9,12 +9,12 @@ import ScrambledText from "../components/ScrambledText";
 import { useContentfulData } from "../context/ContentfulContext";
 
 const floatingIcons = [
-  { icon: <FaReact />, color: "text-cyan-400", delay: 0 },
+  { icon: <FaReact />, color: "text-marvel-blue", delay: 0 },
   { icon: <RiNextjsFill />, color: "text-white", delay: 0.1 },
-  { icon: <SiTailwindcss />, color: "text-yellow", delay: 0.3 },
-  { icon: <SiFramer />, color: "text-purple-300", delay: 0.5 },
-  { icon: <SiJavascript />, color: "text-yellow-400", delay: 0.7 },
-  { icon: <FaGithub />, color: "text-slate-100", delay: 0.9 },
+  { icon: <SiTailwindcss />, color: "text-marvel-blue", delay: 0.3 },
+  { icon: <SiFramer />, color: "text-marvel-gold", delay: 0.5 },
+  { icon: <SiJavascript />, color: "text-marvel-gold", delay: 0.7 },
+  { icon: <FaGithub />, color: "text-marvel-red", delay: 0.9 },
 ];
 
 const Hero = () => {
@@ -25,7 +25,7 @@ const Hero = () => {
     return null;
   }
 
-  const greeting = `Hi, I'm ${personal.name}`;
+  const greeting = `I AM ${personal.name.toUpperCase()}`;
 
   const handleContactClick = () => {
     const contactSection = document.getElementById("contact");
@@ -37,38 +37,44 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-16"
+      className="relative flex min-h-screen items-center overflow-hidden pt-16 bg-marvel-black"
     >
       <ParallaxShapes />
 
-      <div className="absolute inset-0 -z-10 bg-grid-pattern bg-[length:48px_48px] opacity-10" />
+      {/* Comic Dot Pattern */}
+      <div className="absolute inset-0 -z-10 bg-comic-pattern bg-[length:20px_20px] opacity-20" />
+
+      {/* Hero Gradient */}
+      <div className="absolute inset-0 -z-10 bg-hero-gradient opacity-90" />
 
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-24 md:grid-cols-[1.1fr,0.9fr] md:py-32">
         <div className="relative flex flex-col gap-10">
-          <motion.span
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-500/40 bg-brand-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.45em] text-brand-300"
+            className="inline-flex w-fit items-center gap-2 border-l-4 border-marvel-red bg-white/5 px-5 py-2"
           >
-            Frontend Developer
-          </motion.span>
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-marvel-red font-oswald">
+              Frontend Developer
+            </span>
+          </motion.div>
 
           <div className="space-y-6">
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: 0.8,
                 delay: 0.4,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl"
+              className="relative text-5xl font-marvel font-bold leading-none tracking-tighter text-white sm:text-7xl md:text-8xl drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]"
             >
               <ScrambledText
                 text={greeting}
                 duration={1000}
-                className="whitespace-pre-wrap"
+                className="whitespace-pre-wrap text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400"
               />
             </motion.h1>
 
@@ -76,17 +82,18 @@ const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="max-w-xl text-base text-slate-300 sm:text-lg"
+              className="max-w-xl text-lg text-slate-300 font-oswald tracking-wide border-l-2 border-marvel-gold pl-4"
             >
               {personal.summary}
             </motion.p>
+
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.85 }}
-              className="text-lg font-medium text-brand-200 md:text-xl"
+              className="text-xl font-bold text-marvel-gold font-marvel tracking-widest uppercase"
             >
-              {personal.role}
+              {personal.role} // AVENGER LEVEL THREAT
             </motion.p>
           </div>
 
@@ -110,13 +117,16 @@ const Hero = () => {
             {personal.highlights.map((highlight) => (
               <motion.div
                 key={highlight.label}
-                className="glass-card rounded-2xl px-6 py-5 shadow-lg shadow-indigo-900/20"
+                className="comic-border bg-marvel-dark p-4 relative overflow-hidden group"
                 whileHover={{ y: -6 }}
               >
-                <p className="text-sm uppercase tracking-[0.45em] text-slate-400">
+                <div className="absolute top-0 right-0 p-1">
+                  <div className="w-2 h-2 bg-marvel-red rounded-full animate-pulse" />
+                </div>
+                <p className="text-xs uppercase tracking-[0.2em] text-marvel-silver font-oswald mb-1">
                   {highlight.label}
                 </p>
-                <p className="mt-2 text-2xl font-semibold text-white">
+                <p className="text-3xl font-bold text-white font-marvel">
                   {highlight.value}
                 </p>
               </motion.div>
@@ -131,24 +141,29 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          <ProfileCard
-            name={personal.name}
-            title={personal.role}
-            handle="DhruvSheladiya"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={personal.photo}
-            showUserInfo={true}
-            enableTilt={true}
-            enableMobileTilt={false}
-            onContactClick={handleContactClick}
-          />
+          {/* Stark Industries Style Profile Card Wrapper */}
+          <div className="relative p-1 bg-gradient-to-br from-marvel-gold via-marvel-red to-marvel-blue rounded-2xl">
+            <div className="bg-marvel-black rounded-xl overflow-hidden">
+              <ProfileCard
+                name={personal.name}
+                title={personal.role}
+                handle="DhruvSheladiya"
+                status="Online"
+                contactText="ASSEMBLE"
+                avatarUrl={personal.photo}
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={false}
+                onContactClick={handleContactClick}
+              />
+            </div>
+          </div>
 
           <div className="pointer-events-none absolute inset-0">
             {floatingIcons.map((item, index) => (
               <motion.div
                 key={index}
-                className={`absolute flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md text-2xl ${item.color}`}
+                className={`absolute flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/20 bg-marvel-black/80 backdrop-blur-md text-3xl ${item.color} shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
                 style={{
                   top: `${1 + index * 15}%`,
                   right: index % 2 === 0 ? "-12%" : "auto",
