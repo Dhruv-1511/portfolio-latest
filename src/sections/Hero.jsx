@@ -37,17 +37,11 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-16 bg-marvel-black"
+      className="relative flex items-center overflow-hidden pt-16"
     >
       <ParallaxShapes />
 
-      {/* Comic Dot Pattern */}
-      <div className="absolute inset-0 -z-10 bg-comic-pattern bg-[length:20px_20px] opacity-20" />
-
-      {/* Hero Gradient */}
-      <div className="absolute inset-0 -z-10 bg-hero-gradient opacity-90" />
-
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-24 md:grid-cols-[1.1fr,0.9fr] md:py-32">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-8 md:grid-cols-[1.1fr,0.9fr]">
         <div className="relative flex flex-col gap-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}

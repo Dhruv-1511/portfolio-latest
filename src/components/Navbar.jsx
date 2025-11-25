@@ -22,7 +22,6 @@ const navLinks = [
 
 const Navbar = () => {
   const [active, setActive] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const logoControls = useAnimation();
   const { scrollYProgress } = useScroll();
@@ -32,16 +31,7 @@ const Navbar = () => {
     restDelta: 0.001,
   });
 
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
   const headerBlur = useTransform(scrollYProgress, [0, 0.1], [0, 24]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -110,9 +100,9 @@ const Navbar = () => {
         animate="visible"
         className="fixed top-0 left-0 z-50 w-full"
         style={{
-          backgroundColor: scrolled ? "rgba(21, 21, 21, 0.95)" : "transparent",
-          backdropFilter: scrolled ? `blur(${headerBlur}px)` : "none",
-          borderBottom: scrolled ? "1px solid #EC1D24" : "none",
+          backgroundColor: "rgba(21, 21, 21, 0.95)",
+          backdropFilter: `blur(${headerBlur}px)`,
+          borderBottom: "1px solid #EC1D24",
         }}
       >
         {/* Scroll Progress Indicator */}

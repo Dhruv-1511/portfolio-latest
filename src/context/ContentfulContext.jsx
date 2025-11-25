@@ -41,9 +41,7 @@ export const ContentfulProvider = ({ children }) => {
       try {
         setLoading(true);
         setError(null);
-        console.log("Fetching all content from Contentful...");
         const data = await getAllContent();
-        console.log("All content fetched successfully:", data);
         setContent(data);
       } catch (err) {
         console.error("Failed to fetch content from Contentful:", err);

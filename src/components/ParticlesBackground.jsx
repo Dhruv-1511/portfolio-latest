@@ -22,50 +22,49 @@ const ParticlesBackground = () => {
       },
       fpsLimit: 120,
       interactivity: {
+        detectsOn: "window",
         events: {
           onClick: {
             enable: true,
-            mode: "repulse",
+            mode: "push",
           },
           onHover: {
             enable: true,
-            mode: "bubble",
+            mode: "grab",
           },
           resize: true,
         },
         modes: {
-          repulse: {
-            distance: 200,
-            duration: 0.4,
+          push: {
+            quantity: 4,
           },
-          bubble: {
+          grab: {
             distance: 200,
-            size: 6,
-            duration: 2,
-            opacity: 0.8,
-            color: "#FFD700", // Gold on hover
+            links: {
+              opacity: 0.8,
+            },
           },
         },
       },
       particles: {
         color: {
-          value: ["#EC1D24", "#FFD700", "#ffffff"], // Red, Gold, White
+          value: ["#E62429", "#204B9B", "#ffffff"], // Spiderman Red, Blue, White
         },
         links: {
-          color: "#FFD700",
+          color: "#ffffff",
           distance: 150,
           enable: true,
-          opacity: 0.1,
+          opacity: 0.3,
           width: 1,
         },
         move: {
-          direction: "top", // Embers rising
+          direction: "none",
           enable: true,
           outModes: {
-            default: "out",
+            default: "bounce",
           },
-          random: true,
-          speed: 1,
+          random: false,
+          speed: 2,
           straight: false,
         },
         number: {
@@ -76,19 +75,13 @@ const ParticlesBackground = () => {
           value: 80,
         },
         opacity: {
-          value: { min: 0.1, max: 0.5 },
-          animation: {
-            enable: true,
-            speed: 1,
-            minimumValue: 0.1,
-            sync: false,
-          },
+          value: 0.5,
         },
         shape: {
           type: "circle",
         },
         size: {
-          value: { min: 1, max: 3 },
+          value: { min: 1, max: 5 },
         },
       },
       detectRetina: true,

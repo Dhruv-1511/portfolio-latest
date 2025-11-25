@@ -9,7 +9,7 @@ import Footer from "./sections/Footer";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
-import Loader from "./components/Loader";
+import CaptainShieldLoader from "./components/CaptainShieldLoader";
 import ParticlesBackground from "./components/ParticlesBackground";
 import { useContentfulData } from "./context/ContentfulContext";
 
@@ -18,14 +18,14 @@ const App = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   const handleLoaderComplete = () => {
-    setShowLoader(false);
+    setShowLoader(true);
   };
 
   return (
     <>
       <AnimatePresence mode="wait">
         {showLoader && (
-          <Loader
+          <CaptainShieldLoader
             key="loader"
             isLoading={isLoading}
             onComplete={handleLoaderComplete}
