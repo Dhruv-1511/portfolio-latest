@@ -18,7 +18,7 @@ const App = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   const handleLoaderComplete = () => {
-    setShowLoader(true);
+    setShowLoader(false);
   };
 
   return (
