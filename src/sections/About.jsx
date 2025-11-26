@@ -56,7 +56,7 @@ const InteractivePhoto = ({ personal }) => {
         transformStyle: "preserve-3d",
       }}
     >
-      <div className="relative overflow-hidden rounded-3xl border-2 border-white/10 bg-gradient-to-br from-slate-900/90 to-slate-950/90 p-4 shadow-2xl">
+      <div className="relative overflow-hidden rounded-3xl border border-red-900/30 bg-black p-4 shadow-[0_0_30px_rgba(255,0,0,0.1)]">
         {/* Photo Container */}
         <motion.div
           className="relative aspect-[13/15] overflow-hidden rounded-2xl"
@@ -68,7 +68,7 @@ const InteractivePhoto = ({ personal }) => {
           <motion.img
             src={personal.redImg}
             alt={`${personal.name} portrait`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover sepia-[.4] hover:sepia-0 transition-all duration-500"
             animate={{ scale: [1, 1.05, 1] }}
             transition={{
               duration: 8,
@@ -77,7 +77,7 @@ const InteractivePhoto = ({ personal }) => {
             }}
           />
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-brand-500/20 via-transparent to-sky-400/20"
+            className="absolute inset-0 bg-gradient-to-tr from-red-900/20 via-transparent to-black/40"
             animate={{ opacity: [0.3, 0.5, 0.3] }}
             transition={{
               duration: 6,
@@ -89,12 +89,12 @@ const InteractivePhoto = ({ personal }) => {
 
         {/* Decorative Border Glow */}
         <motion.div
-          className="absolute inset-0 rounded-3xl border-2 border-brand-500/30"
+          className="absolute inset-0 rounded-3xl border border-red-600/30"
           animate={{
             boxShadow: [
-              "0 0 20px rgba(99, 102, 241, 0.3)",
-              "0 0 40px rgba(99, 102, 241, 0.5)",
-              "0 0 20px rgba(99, 102, 241, 0.3)",
+              "0 0 20px rgba(255, 9, 9, 0.1)",
+              "0 0 40px rgba(255, 9, 9, 0.2)",
+              "0 0 20px rgba(255, 9, 9, 0.1)",
             ],
           }}
           transition={{
@@ -115,7 +115,7 @@ const StoryCard = ({ title, content, icon: Icon, index, gradient }) => {
     <motion.div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-6 backdrop-blur-sm"
+      className="group relative overflow-hidden rounded-2xl border border-red-900/20 bg-black/80 p-6 backdrop-blur-sm hover:border-red-600/50 transition-colors"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -132,15 +132,17 @@ const StoryCard = ({ title, content, icon: Icon, index, gradient }) => {
       <div className="relative z-10">
         <div className="mb-4 flex items-center gap-3">
           <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5"
+            className="flex h-12 w-12 items-center justify-center rounded-xl border border-red-900/30 bg-red-900/10"
             whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
             transition={{ duration: 0.5 }}
           >
-            <Icon className="text-xl text-brand-300" />
+            <Icon className="text-xl text-red-500" />
           </motion.div>
-          <h4 className="text-lg font-bold text-white">{title}</h4>
+          <h4 className="text-lg font-bold text-white font-serif">{title}</h4>
         </div>
-        <p className="text-sm leading-relaxed text-slate-300">{content}</p>
+        <p className="text-sm leading-relaxed text-gray-400 font-mono">
+          {content}
+        </p>
       </div>
 
       {/* Corner Decoration */}
@@ -165,43 +167,28 @@ const About = () => {
       title: "My Journey",
       content: personal.summary,
       icon: FiHeart,
-      gradient: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+      gradient: "linear-gradient(135deg, #ff0909, #800000)",
     },
     {
       title: "Design Philosophy",
       content:
         "Human-centered decisions, inclusive interactions, and purposeful visuals that make interfaces memorable and accessible.",
       icon: FiTarget,
-      gradient: "linear-gradient(135deg, #38bdf8, #06b6d4)",
+      gradient: "linear-gradient(135deg, #888888, #333333)",
     },
     {
       title: "Motion & Animation",
       content:
         "Micro-interactions, tactile motion language, and cinematic storytelling that flows with intent and delight.",
       icon: FiZap,
-      gradient: "linear-gradient(135deg, #ec4899, #f472b6)",
+      gradient: "linear-gradient(135deg, #ff4d4d, #ff0000)",
     },
     {
       title: "Code & Performance",
       content:
         "Ship resilient architectures, lighthouse-friendly experiences, and scalable code ecosystems that grow with teams.",
       icon: FiCode,
-      gradient: "linear-gradient(135deg, #10b981, #34d399)",
-    },
-  ];
-
-  const quickFacts = [
-    {
-      label: personal.highlights[0].label,
-      value: personal.highlights[0].value,
-    },
-    {
-      label: personal.highlights[1].label,
-      value: personal.highlights[1].value,
-    },
-    {
-      label: personal.highlights[2].label,
-      value: personal.highlights[2].value,
+      gradient: "linear-gradient(135deg, #1a1a1a, #000000)",
     },
   ];
 
@@ -220,35 +207,6 @@ const About = () => {
           <div className="space-y-8">
             {/* Interactive Photo */}
             <InteractivePhoto personal={personal} />
-
-            {/* Quick Facts - Horizontal Layout */}
-            {/* <motion.div
-              className="grid grid-cols-3 gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              {quickFacts.map((fact, index) => (
-                <motion.div
-                  key={fact.label}
-                  className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-4 text-center backdrop-blur-sm"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -4, scale: 1.05 }}
-                >
-                  <motion.div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-indigo-500/5 to-sky-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <p className="relative z-10 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-                    {fact.label}
-                  </p>
-                  <p className="relative z-10 mt-2 text-xl font-bold text-white">
-                    {fact.value}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div> */}
           </div>
 
           {/* Right Column - Story Cards */}
@@ -261,60 +219,62 @@ const About = () => {
 
         {/* Contact Section - Redesigned */}
         <motion.div
-          className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-8 backdrop-blur-xl"
+          className="mt-16 rounded-3xl border border-red-900/20 bg-black/60 p-8 backdrop-blur-xl shadow-[0_0_20px_rgba(255,0,0,0.1)]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-              <FiCoffee className="text-brand-300" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-red-900/30 bg-red-900/10">
+              <FiCoffee className="text-red-500" />
             </div>
-            <h3 className="text-lg font-bold text-white">Let's Connect</h3>
+            <h3 className="text-lg font-bold text-white font-serif">
+              Let's Connect
+            </h3>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <motion.a
               href={`mailto:${personal.contact.email}`}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-brand-500/40 hover:bg-brand-500/10"
+              className="group relative overflow-hidden rounded-xl border border-red-900/20 bg-black/40 p-5 backdrop-blur-sm transition-all hover:border-red-500 hover:bg-red-900/10"
               whileHover={{ y: -2, scale: 1.02 }}
             >
               <div className="mb-3 flex items-center gap-2">
-                <FiMail className="text-brand-300" />
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                <FiMail className="text-red-500" />
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
                   Email
                 </p>
               </div>
-              <p className="break-words text-sm font-semibold text-white">
+              <p className="break-words text-sm font-semibold text-white font-mono">
                 {personal.contact.email}
               </p>
             </motion.a>
             <motion.a
               href={`tel:${personal.contact.phone}`}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-brand-500/40 hover:bg-brand-500/10"
+              className="group relative overflow-hidden rounded-xl border border-red-900/20 bg-black/40 p-5 backdrop-blur-sm transition-all hover:border-red-500 hover:bg-red-900/10"
               whileHover={{ y: -2, scale: 1.02 }}
             >
               <div className="mb-3 flex items-center gap-2">
-                <FiPhone className="text-brand-300" />
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                <FiPhone className="text-red-500" />
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
                   Phone
                 </p>
               </div>
-              <p className="text-sm font-semibold text-white">
+              <p className="text-sm font-semibold text-white font-mono">
                 {personal.contact.phone}
               </p>
             </motion.a>
             <motion.div
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-brand-500/40 hover:bg-brand-500/10"
+              className="group relative overflow-hidden rounded-xl border border-red-900/20 bg-black/40 p-5 backdrop-blur-sm transition-all hover:border-red-500 hover:bg-red-900/10"
               whileHover={{ y: -2, scale: 1.02 }}
             >
               <div className="mb-3 flex items-center gap-2">
-                <FiMapPin className="text-brand-300" />
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                <FiMapPin className="text-red-500" />
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
                   Location
                 </p>
               </div>
-              <p className="text-sm font-semibold text-white">
+              <p className="text-sm font-semibold text-white font-mono">
                 {personal.contact.location}
               </p>
             </motion.div>
@@ -325,7 +285,7 @@ const About = () => {
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <motion.div
             className="absolute right-0 top-1/4 h-96 w-96 rounded-full blur-3xl opacity-10"
-            style={{ background: "rgba(99, 102, 241, 0.4)" }}
+            style={{ background: "rgba(255, 9, 9, 0.4)" }}
             animate={{
               scale: [1, 1.2, 1],
               x: [0, 30, 0],
@@ -337,9 +297,9 @@ const About = () => {
               ease: "easeInOut",
             }}
           />
-          <motion.div
+          {/* <motion.div
             className="absolute left-0 bottom-1/4 h-80 w-80 rounded-full blur-3xl opacity-8"
-            style={{ background: "rgba(14, 165, 233, 0.4)" }}
+            style={{ background: "rgba(100, 100, 100, 0.4)" }}
             animate={{
               scale: [1, 1.3, 1],
               x: [0, -25, 0],
@@ -350,7 +310,7 @@ const About = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-          />
+          /> */}
         </div>
       </div>
     </section>

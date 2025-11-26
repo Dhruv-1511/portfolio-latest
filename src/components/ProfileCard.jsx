@@ -62,45 +62,44 @@ const ProfileCard = ({
       className="relative mx-auto max-w-sm"
     >
       <motion.div
-        animate={{ rotate: [0, 2, -2, 0] }}
+        animate={{ rotate: [0, 1, -1, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -inset-4 border-2 border-marvel-blue/30 bg-marvel-blue/5"
+        className="absolute -inset-4 border border-red-900/30 bg-red-900/5"
         style={{
-          clipPath: "polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
         }}
       />
 
       <motion.div
         whileHover={{ y: -6 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex flex-col overflow-hidden border-2 border-marvel-blue bg-gray-900 shadow-[0_0_30px_rgba(0,120,242,0.2)]"
+        className="relative z-10 flex flex-col overflow-hidden border border-red-600 bg-black shadow-[0_0_30px_rgba(255,9,9,0.2)]"
         style={{
           transformStyle: "preserve-3d",
-          clipPath: "polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%)",
         }}
       >
-        {/* S.H.I.E.L.D. Header */}
-        <div className="bg-marvel-blue px-4 py-2 flex justify-between items-center">
-          <span className="text-xs font-bold text-white tracking-widest">
-            S.H.I.E.L.D. ID
+        {/* Hawkins Lab Header */}
+        <div className="bg-red-900/80 px-4 py-2 flex justify-between items-center border-b border-red-600">
+          <span className="text-xs font-bold text-white tracking-widest font-serif">
+            HAWKINS LAB
           </span>
-          <span className="text-xs font-mono text-white/80">LVL. 7</span>
+          <span className="text-xs font-mono text-white/80">RESTRICTED</span>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden border-b-2 border-marvel-blue">
+        <div className="relative aspect-[4/3] overflow-hidden border-b border-red-600">
           {avatarUrl ? (
             <motion.img
               src={avatarUrl}
               alt={name}
-              className="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="h-full w-full object-cover grayscale sepia-[.5] hover:grayscale-0 transition-all duration-500"
               initial={{ scale: 1.05 }}
               animate={{ scale: 1 }}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gray-800">
-              <span className="text-4xl font-semibold text-white">
+            <div className="flex h-full w-full items-center justify-center bg-gray-900">
+              <span className="text-4xl font-semibold text-red-600 font-stranger">
                 {name
                   .split(" ")
                   .map((word) => word[0])
@@ -109,45 +108,45 @@ const ProfileCard = ({
             </div>
           )}
 
-          {/* Holographic Overlay */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-marvel-blue/50 to-transparent opacity-40 pointer-events-none" />
+          {/* Holographic/VHS Overlay */}
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-40 pointer-events-none" />
 
           {/* Scan Line */}
           <motion.div
-            className="absolute inset-0 h-1 bg-marvel-blue/50 shadow-[0_0_10px_#0078F2]"
+            className="absolute inset-0 h-1 bg-red-500/50 shadow-[0_0_10px_#ff0000]"
             animate={{ top: ["0%", "100%", "0%"] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
         </div>
 
         {showUserInfo && (
           <div
-            className="relative p-6 bg-gray-900"
+            className="relative p-6 bg-black"
             style={{ transform: "translateZ(20px)" }}
           >
             <div className="mb-4">
-              <h3 className="text-2xl font-bold text-white font-oswald uppercase tracking-wide">
+              <h3 className="text-2xl font-bold text-white font-serif uppercase tracking-wide">
                 {name}
               </h3>
-              <p className="mt-1 text-sm text-marvel-blue font-mono uppercase">
+              <p className="mt-1 text-sm text-red-500 font-mono uppercase">
                 {title}
               </p>
-              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-gray-400">
-                CODENAME: @DHRUV_15_11
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-gray-500">
+                SUBJECT: 011
               </p>
             </div>
 
-            <div className="mb-4 flex items-center gap-2 border-t border-gray-700 pt-2">
+            <div className="mb-4 flex items-center gap-2 border-t border-red-900/30 pt-2">
               <motion.span
                 className={`h-2 w-2 rounded-full ${
-                  status === "Online" ? "bg-green-500" : "bg-red-500"
+                  status === "Online" ? "bg-red-600" : "bg-gray-600"
                 } shadow-[0_0_10px_currentColor]`}
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 1, repeat: Infinity }}
               />
-              <span className="text-xs uppercase tracking-[0.2em] text-gray-300 font-bold">
-                STATUS: {status === "Online" ? "ACTIVE" : "OFFLINE"}
+              <span className="text-xs uppercase tracking-[0.2em] text-gray-400 font-bold">
+                STATUS: {status === "Online" ? "BREACH" : "CONTAINED"}
               </span>
             </div>
 
@@ -156,7 +155,7 @@ const ProfileCard = ({
                 onClick={onContactClick}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex w-full items-center justify-center gap-2 bg-marvel-blue/20 border border-marvel-blue text-marvel-blue px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:bg-marvel-blue hover:text-white clip-path-slant"
+                className="flex w-full items-center justify-center gap-2 bg-red-900/20 border border-red-600 text-red-500 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:bg-red-600 hover:text-white hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]"
               >
                 <FiMail size={14} />
                 {contactText}

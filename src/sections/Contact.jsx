@@ -30,6 +30,8 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   if (!personal || !socials || socials.length === 0) {
     return null;
@@ -40,11 +42,41 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
+    setIsLoading(true);
+    setError(false);
+    setSubmitted(false);
+
+    try {
+      // Use Netlify Function endpoint
+      // In production, this will be /.netlify/functions/send-mail
+      // In development with netlify dev, it will also work
+      const response = await fetch("/.netlify/functions/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(true);
+        setTimeout(() => setError(false), 5000);
+      }
+    } catch (err) {
+      console.error("Error sending email:", err);
+      setError(true);
+      setTimeout(() => setError(false), 5000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -111,19 +143,74 @@ const Contact = () => {
             </label>
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="mt-8 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 via-indigo-500 to-sky-400 px-8 py-3 text-sm font-semibold uppercase tracking-[0.4em] text-white shadow-lg shadow-indigo-900/40"
+              disabled={isLoading}
+              whileHover={{
+                scale: isLoading ? 1 : 1.08,
+                boxShadow:
+                  "0 0 40px rgba(255, 9, 9, 1), 0 0 80px rgba(255, 9, 9, 0.5), inset 0 0 20px rgba(255, 9, 9, 0.2)",
+              }}
+              whileTap={{ scale: isLoading ? 1 : 0.92 }}
+              className={`group relative mt-8 flex items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-red-600/90 bg-gradient-to-br from-black via-red-950/30 to-black px-10 py-4 text-sm font-bold uppercase tracking-[0.5em] text-red-500 shadow-[0_0_25px_rgba(255,9,9,0.6),inset_0_0_15px_rgba(255,9,9,0.1)] hover:border-red-500 hover:text-white transition-all duration-500 font-serif ${
+                isLoading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+              style={{
+                textShadow:
+                  "0 0 10px rgba(255, 9, 9, 0.8), 0 0 20px rgba(255, 9, 9, 0.6), 0 0 30px rgba(255, 9, 9, 0.4)",
+                WebkitTextStroke: "0.5px #ff0909",
+              }}
             >
-              Send Message
+              {/* Animated background glow */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-red-600/20 to-transparent"
+                animate={{
+                  x: ["-100%", "200%"],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+
+              {/* Flickering overlay effect */}
+              <motion.div
+                className="absolute inset-0 bg-red-600/10"
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Button text with glow */}
+              <span className="relative z-10 drop-shadow-[0_0_8px_rgba(255,0,0,1)] group-hover:drop-shadow-[0_0_15px_rgba(255,0,0,1)] transition-all duration-300">
+                {isLoading ? "Sending..." : "Send Message"}
+              </span>
+
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2 border-red-600/80 group-hover:border-red-500 transition-colors" />
+              <div className="absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2 border-red-600/80 group-hover:border-red-500 transition-colors" />
+              <div className="absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-red-600/80 group-hover:border-red-500 transition-colors" />
+              <div className="absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-red-600/80 group-hover:border-red-500 transition-colors" />
             </motion.button>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: submitted ? 1 : 0, y: submitted ? 0 : 20 }}
-              className="mt-4 text-sm text-brand-300"
+              className="mt-4 text-sm text-green-400"
             >
-              Thanks! Your message has been captured.
+              ✅ Thanks! Your message has been sent successfully.
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: error ? 1 : 0, y: error ? 0 : 20 }}
+              className="mt-4 text-sm text-red-400"
+            >
+              ❌ Oops! Something went wrong. Please try again.
             </motion.div>
           </motion.form>
 
@@ -132,49 +219,49 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 p-8"
+            className="relative overflow-hidden rounded-3xl border border-red-600/50 bg-black/80 p-8 shadow-[0_0_30px_rgba(255,0,0,0.25)] hover:shadow-[0_0_50px_rgba(255,0,0,0.4)] transition-shadow duration-500"
           >
             <motion.div
-              className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-500/20 via-black/0 to-sky-400/10"
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-red-900/20 via-black/0 to-red-900/10"
               animate={{ opacity: [0.35, 0.6, 0.35] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute -left-16 -top-24 h-52 w-52 rounded-full bg-gradient-to-br from-indigo-500/40 to-transparent blur-3xl"
+              className="absolute -left-16 -top-24 h-52 w-52 rounded-full bg-gradient-to-br from-red-600/20 to-transparent blur-3xl"
               animate={{ y: [-15, 15, -15] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute -bottom-16 right-0 h-48 w-48 rounded-full bg-gradient-to-tl from-sky-500/30 to-transparent blur-3xl"
+              className="absolute -bottom-16 right-0 h-48 w-48 rounded-full bg-gradient-to-tl from-red-600/20 to-transparent blur-3xl"
               animate={{ y: [12, -12, 12] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             />
 
             <div className="relative space-y-6">
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-500 font-mono drop-shadow-[0_0_2px_rgba(255,0,0,0.5)]">
                   Email
                 </p>
-                <div className="flex items-center gap-3 text-sm font-semibold text-white">
-                  <FiMail />
+                <div className="flex items-center gap-3 text-sm font-semibold text-white font-serif tracking-wide drop-shadow-[0_0_5px_rgba(255,0,0,0.8)]">
+                  <FiMail className="text-red-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" />
                   {personal.contact.email}
                 </div>
               </div>
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-500 font-mono drop-shadow-[0_0_2px_rgba(255,0,0,0.5)]">
                   Phone
                 </p>
-                <div className="flex items-center gap-3 text-sm font-semibold text-white">
-                  <FiPhone />
+                <div className="flex items-center gap-3 text-sm font-semibold text-white font-serif tracking-wide drop-shadow-[0_0_5px_rgba(255,0,0,0.8)]">
+                  <FiPhone className="text-red-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" />
                   {personal.contact.phone}
                 </div>
               </div>
 
               <div className="pt-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-500 font-mono drop-shadow-[0_0_2px_rgba(255,0,0,0.5)]">
                   Social Reach
                 </p>
-                <div className="mt-4 grid grid-cols-2 gap-4">
+                <div className="mt-4 grid sm:grid-cols-2 gap-4">
                   {socials?.map((social) => {
                     const Icon = iconMap[social?.label] ?? FiLinkedin;
                     return (
@@ -184,16 +271,16 @@ const Contact = () => {
                         target="_blank"
                         rel="noreferrer"
                         whileHover={{ scale: 1.05, y: -2 }}
-                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-2 py-3 text-sm font-medium text-white transition hover:border-brand-500/40 hover:text-brand-300"
+                        className="group flex items-center gap-3 rounded-2xl border border-red-900/50 bg-black/40 px-2 py-3 text-sm font-medium text-white transition shadow-[0_0_10px_rgba(255,0,0,0.1)] hover:border-red-500 hover:bg-red-900/20 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)]"
                       >
-                        <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg text-brand-300 transition group-hover:border-brand-500/40 group-hover:text-brand-200">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-red-900/30 bg-red-900/10 text-lg text-red-500 transition group-hover:border-red-500 group-hover:text-white group-hover:shadow-[0_0_10px_rgba(255,0,0,0.8)]">
                           <Icon />
                         </span>
                         <div>
-                          <p className="text-xs uppercase tracking-[0.4em] text-slate-400">
+                          <p className="text-xs uppercase tracking-[0.4em] text-gray-500 font-mono group-hover:text-red-400 transition-colors group-hover:drop-shadow-[0_0_5px_rgba(255,0,0,0.8)]">
                             {social?.label}
                           </p>
-                          <p className="text-sm font-semibold text-white">
+                          <p className="text-sm font-semibold text-white font-serif tracking-wide group-hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
                             {social?.handle}
                           </p>
                         </div>

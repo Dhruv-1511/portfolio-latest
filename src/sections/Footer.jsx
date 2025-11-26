@@ -29,7 +29,7 @@ const Footer = () => (
           Dhruv Sheladiya
         </p>
         <p className="text-sm text-slate-400">
-          © {new Date().getFullYear()} Crafted with React, Tailwind CSS & Framer
+          © {new Date().getFullYear()} Crafted with React, Tailwind CSS, Contentful & Framer
           Motion.
         </p>
       </div>

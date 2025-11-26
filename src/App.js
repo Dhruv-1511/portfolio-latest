@@ -9,8 +9,9 @@ import Footer from "./sections/Footer";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
-import CaptainShieldLoader from "./components/CaptainShieldLoader";
+import Loader from "./components/Loader";
 import ParticlesBackground from "./components/ParticlesBackground";
+import BackgroundMusic from "./components/BackgroundMusic";
 import { useContentfulData } from "./context/ContentfulContext";
 
 const App = () => {
@@ -23,21 +24,19 @@ const App = () => {
 
   return (
     <>
+      <BackgroundMusic />
       <AnimatePresence mode="wait">
         {showLoader && (
-          <CaptainShieldLoader
-            key="loader"
-            isLoading={isLoading}
-            onComplete={handleLoaderComplete}
-          />
+          <Loader key="loader" onComplete={handleLoaderComplete} />
         )}
       </AnimatePresence>
 
       {!showLoader && (
-        <div className="relative min-h-screen bg-transparent text-slate-100">
+        <div className="relative min-h-screen bg-transparent text-slate-200 font-sans selection:bg-red-900 selection:text-white">
+          <div className="upside-down-overlay" />
           <ParticlesBackground />
           <Navbar />
-          <main className="flex flex-col gap-24 pt-24">
+          <main className="flex flex-col gap-24 pt-24 relative z-10">
             <Hero />
             <About />
             <Education />
