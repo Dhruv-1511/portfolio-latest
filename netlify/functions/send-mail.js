@@ -40,7 +40,8 @@ exports.handler = async (event, context) => {
     // Email to Admin
     await transporter.sendMail({
       from: process.env.REACT_APP_RESEND_FROM_EMAIL,
-      to: process.env.REACT_APP_RESEND_FROM_EMAIL || "harshal.dev701@gmail.com",
+      to:
+        process.env.REACT_APP_RESEND_FROM_EMAIL || "dhruvsheladiya07@gmail.com",
       subject: "New Contact Form Submission",
       html: `
 <div style="font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6fb; padding: 0; margin: 0;">
@@ -100,9 +101,9 @@ exports.handler = async (event, context) => {
 
     // Email to User
     await transporter.sendMail({
-      from: `"Harshal Chaklasiya" <${process.env.REACT_APP_RESEND_FROM_EMAIL}>`,
+      from: `"Dhruv Sheladiya" <${process.env.REACT_APP_RESEND_FROM_EMAIL}>`,
       to: email,
-      subject: `Hi, ${name}! Thank You for Contacting Harshal!`,
+      subject: `Hi, ${name}! Thank You for Contacting Dhruv!`,
       html: `
 <div style="font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.7; color: #0f172a; max-width: 620px; margin: 0 auto; background: #f8fafc; border-radius: 10px; overflow: hidden;">
   <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); padding: 35px 25px; text-align: center;">
@@ -118,7 +119,7 @@ exports.handler = async (event, context) => {
     <p style="margin-bottom: 18px; color: #334155; font-size: 16px;">Hi 👋,</p>
 
     <p style="margin-bottom: 20px; color: #334155; font-size: 16px;">
-      Thank you for contacting <strong>Harshal Chaklasiya</strong>.  
+      Thank you for contacting <strong>Dhruv Sheladiya</strong>.  
       I appreciate your time and interest. I've successfully received your message from my portfolio website.
     </p>
 
@@ -138,13 +139,13 @@ exports.handler = async (event, context) => {
     </p>
 
     <p style="margin-top: 12px; color: #334155; font-size: 16px; font-weight: 600;">
-      — Harshal Chaklasiya
+      — Dhruv Sheladiya
     </p>
   </div>
 
   <div style="background: #f1f5f9; padding: 15px 20px; text-align: center;">
     <p style="margin: 0; color: #475569; font-size: 13px;">
-      This is an automated message sent from Harshal's Portfolio website.
+      This is an automated message sent from Dhruv's Portfolio website.
     </p>
   </div>
 </div>
