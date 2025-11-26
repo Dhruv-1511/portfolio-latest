@@ -60,7 +60,7 @@ const BackgroundMusic = () => {
     <audio ref={audioRef} loop autoPlay>
       <source src="/bg-music.mp3" type="audio/mpeg" />
       <source src="/bg-music.ogg" type="audio/ogg" />
-      Your browser does not support the audio element.
+      Your browser doesn't support the audio element.
     </audio>
   );
 };
