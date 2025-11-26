@@ -35,6 +35,7 @@ const App = () => {
         <div className="relative min-h-screen bg-transparent text-slate-200 font-sans selection:bg-red-900 selection:text-white">
           <div className="upside-down-overlay" />
           <ParticlesBackground />
+          <BackgroundMusic />
           <Navbar />
           <main className="flex flex-col gap-24 pt-24 relative z-10">
             <Hero />

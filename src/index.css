@@ -14,15 +14,16 @@ html {
 
 body {
   @apply font-sans text-slate-200 antialiased bg-stranger-black;
-  background-image: radial-gradient(circle at 50% 50%,
-      #1a0b0b 0%,
-      #000000 100%);
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    #1a0b0b 0%,
+    #000000 100%
+  );
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(255, 9, 9, 0.5);
-  /* Neon Red */
+  background: rgba(255, 9, 9, 0.5); /* Neon Red */
   color: #ffffff;
 }
 
@@ -34,9 +35,11 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%,
+  background: radial-gradient(
+      circle at 50% 50%,
       rgba(255, 255, 255, 0.05) 0%,
-      transparent 60%),
+      transparent 60%
+    ),
     url("https://grainy-gradients.vercel.app/noise.svg");
   background-size: cover, 200px 200px;
   opacity: 0.15;
@@ -49,7 +52,6 @@ body {
   0% {
     background-position: 0% 0%;
   }
-
   100% {
     background-position: 100% 0%;
   }
@@ -58,17 +60,20 @@ body {
 .glass-card {
   position: relative;
   @apply border border-red-900/30 backdrop-blur-md shadow-glow-red;
-  background: linear-gradient(140deg,
-      rgba(10, 10, 10, 0.8),
-      rgba(20, 0, 0, 0.6));
+  background: linear-gradient(
+    140deg,
+    rgba(10, 10, 10, 0.8),
+    rgba(20, 0, 0, 0.6)
+  );
 }
-
 .glass-card2 {
   position: relative;
   @apply border border-red-900/30 backdrop-blur-md shadow-glow-red2;
-  background: linear-gradient(140deg,
-      rgba(10, 10, 10, 0.8),
-      rgba(20, 0, 0, 0.6));
+  background: linear-gradient(
+    140deg,
+    rgba(10, 10, 10, 0.8),
+    rgba(20, 0, 0, 0.6)
+  );
 }
 
 /* Neon Border Effect */
@@ -168,23 +173,18 @@ body {
   0% {
     clip: rect(30px, 9999px, 10px, 0);
   }
-
   20% {
     clip: rect(80px, 9999px, 90px, 0);
   }
-
   40% {
     clip: rect(10px, 9999px, 50px, 0);
   }
-
   60% {
     clip: rect(40px, 9999px, 20px, 0);
   }
-
   80% {
     clip: rect(70px, 9999px, 60px, 0);
   }
-
   100% {
     clip: rect(20px, 9999px, 80px, 0);
   }
@@ -194,23 +194,18 @@ body {
   0% {
     clip: rect(10px, 9999px, 80px, 0);
   }
-
   20% {
     clip: rect(60px, 9999px, 10px, 0);
   }
-
   40% {
     clip: rect(90px, 9999px, 30px, 0);
   }
-
   60% {
     clip: rect(20px, 9999px, 70px, 0);
   }
-
   80% {
     clip: rect(50px, 9999px, 40px, 0);
   }
-
   100% {
     clip: rect(80px, 9999px, 20px, 0);
   }
