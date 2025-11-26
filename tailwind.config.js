@@ -4,42 +4,55 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Oswald'", "'Roboto Condensed'", "sans-serif"], // Marvel-like fonts
-        marvel: ["'Marvel'", "sans-serif"],
+        sans: ["'Inter'", "sans-serif"],
+        stranger: ["'Rubik Glitch'", "cursive"], // Glitchy font for effects
+        serif: ["'Playfair Display'", "serif"], // For the main title look
       },
       colors: {
-        marvel: {
-          red: "#EC1D24",
-          dark: "#202020",
-          black: "#151515",
-          gold: "#FFD700",
-          blue: "#0078F2",
-          silver: "#C0C0C0",
+        stranger: {
+          red: "#ff0909", // Neon Red
+          dark: "#050505", // Deep Black
+          black: "#000000",
+          blue: "#0a1128", // Upside Down Blue
+          grey: "#888888",
         },
         brand: {
-          500: "#EC1D24", // Override brand with Marvel Red
-          400: "#FF4D4D",
-          300: "#FF8080",
-        },
-        dark: {
-          900: "#050505",
-          800: "#121212",
-          700: "#1E1E1E",
+          500: "#ff0909",
+          400: "#ff4d4d",
+          300: "#ff8080",
         },
       },
       backgroundImage: {
-        "comic-pattern":
-          "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
-        "hero-gradient": "linear-gradient(to right, #050505, #1a1a1a)",
-        "gradient-radial": "radial-gradient(circle, var(--tw-gradient-stops))",
+        "upside-down":
+          "radial-gradient(circle at center, #1a0b0b 0%, #000000 100%)",
+        "fog-pattern": "url('https://grainy-gradients.vercel.app/noise.svg')", // Replaced broken smoke image with noise
       },
       boxShadow: {
-        "glow-red": "0 0 20px rgba(236, 29, 36, 0.5)",
-        "glow-gold": "0 0 20px rgba(255, 215, 0, 0.5)",
-        "glow-blue": "0 0 20px rgba(0, 120, 242, 0.5)",
+        "glow-red":
+          "0 0 20px rgba(255, 9, 9, 0.6), 0 0 40px rgba(255, 9, 9, 0.3)",
+        "glow-blue": "0 0 20px rgba(10, 17, 40, 0.6)",
       },
       animation: {
-        "spin-slow": "spin 3s linear infinite",
+        flicker: "flicker 3s infinite alternate",
+        float: "float 6s ease-in-out infinite",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+      keyframes: {
+        flicker: {
+          "0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%": {
+            opacity: "1",
+            boxShadow:
+              "0 0 20px rgba(255, 9, 9, 0.6), 0 0 40px rgba(255, 9, 9, 0.3)",
+          },
+          "20%, 24%, 55%": {
+            opacity: "0.5",
+            boxShadow: "none",
+          },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
       },
     },
   },

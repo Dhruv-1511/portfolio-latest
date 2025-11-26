@@ -3,9 +3,9 @@ import clsx from "clsx";
 
 const variants = {
   primary:
-    "bg-marvel-red text-white shadow-glow-red hover:bg-red-600 border border-red-500",
+    "bg-red-900/80 text-white shadow-[0_0_15px_rgba(255,0,0,0.5)] hover:bg-red-600 border border-red-500 hover:shadow-[0_0_25px_rgba(255,0,0,0.8)]",
   secondary:
-    "border border-marvel-gold text-marvel-gold hover:bg-marvel-gold/10 shadow-glow-gold",
+    "border border-red-500 text-red-500 hover:bg-red-900/20 shadow-[0_0_10px_rgba(255,0,0,0.3)]",
 };
 
 const PrimaryButton = ({
@@ -22,7 +22,7 @@ const PrimaryButton = ({
     whileTap={{ scale: 0.98 }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
     className={clsx(
-      "flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-[0.25em] transition-all font-oswald clip-path-slant",
+      "flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-[0.25em] transition-all font-serif clip-path-slant",
       variants[variant]
     )}
     style={{

@@ -23,7 +23,10 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="relative scroll-mt-24 overflow-hidden">
+    <section
+      id="projects"
+      className="relative scroll-mt-32 md:scroll-mt-40 overflow-hidden"
+    >
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <SectionHeading
           eyebrow="Projects"

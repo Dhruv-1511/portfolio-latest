@@ -60,8 +60,19 @@ const Navbar = () => {
   const handleLinkClick = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      const navbarOffset = 96; // compensate for fixed navbar height
+      const elementPosition =
+        el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navbarOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    } else if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
     setActive(id);
     setMenuOpen(false);
   };
@@ -88,7 +99,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-40 bg-black/90 backdrop-blur-sm md:hidden"
             onClick={() => setMenuOpen(false)}
           />
         )}
@@ -100,9 +111,10 @@ const Navbar = () => {
         animate="visible"
         className="fixed top-0 left-0 z-50 w-full"
         style={{
-          backgroundColor: "rgba(21, 21, 21, 0.95)",
+          backgroundColor: "rgba(5, 5, 5, 0.95)",
           backdropFilter: `blur(${headerBlur}px)`,
-          borderBottom: "1px solid #EC1D24",
+          borderBottom: "1px solid #ff0909",
+          boxShadow: "0 0 15px rgba(255, 9, 9, 0.2)",
         }}
       >
         {/* Scroll Progress Indicator */}
@@ -110,8 +122,8 @@ const Navbar = () => {
           className="absolute bottom-0 left-0 right-0 h-1 origin-left z-50"
           style={{
             scaleX,
-            background: "#EC1D24",
-            boxShadow: "0 0 10px #EC1D24",
+            background: "#ff0909",
+            boxShadow: "0 0 10px #ff0909",
           }}
         />
 
@@ -122,60 +134,26 @@ const Navbar = () => {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleLinkClick("home")}
-            onHoverStart={() => {
-              logoControls.start({
-                rotate: [0, -5, 5, -5, 0],
-                transition: { duration: 0.4, ease: "easeInOut" },
-              });
-            }}
           >
-            {/* Marvel Style Logo */}
-            <motion.div className="relative" animate={logoControls}>
-              {/* Outer Glow */}
-              <motion.div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-brand-500 via-indigo-500 to-sky-400 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-40" />
-
-              {/* Logo Container */}
+            {/* Stranger Things Style Logo */}
+            <div className="flex leading-none items-center text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-900 stroke-red-500 uppercase tracking-widest drop-shadow-[0_0_5px_rgba(255,0,0,0.8)]">
+              <img
+                src="/logo192.png"
+                alt="Logo"
+                className="relative z-10 size-8 object-contain drop-shadow-lg "
+              />
               <motion.span
-                className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border-2 border-white/10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-xl backdrop-blur-sm transition-all duration-300 group-hover:border-brand-500/50 group-hover:bg-gradient-to-br group-hover:from-brand-500/20 group-hover:via-indigo-500/15 group-hover:to-sky-400/20"
-                style={{
-                  boxShadow:
-                    "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                }}
+                className="text-3xl font-serif font-bold "
+                style={{ WebkitTextStroke: "1px #ff0909" }}
               >
-                {/* Animated Shine Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  animate={{
-                    x: ["-100%", "100%"],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatDelay: 2,
-                    ease: "linear",
-                  }}
-                />
-
-                {/* Inner Glow on Hover */}
-                <motion.div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-500/40 via-indigo-500/30 to-sky-400/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                {/* Logo Image */}
-                <img
-                  src="/logo192.png"
-                  alt="Logo"
-                  className="relative z-10 h-9 w-9 object-contain drop-shadow-lg"
-                />
+                HRUV
               </motion.span>
-            </motion.div>
-
-            {/* Text Content */}
-            <div className="flex flex-col leading-none">
-              <motion.span className="text-xs font-bold uppercase tracking-[0.2em] text-marvel-red">
-                Portfolio
-              </motion.span>
-              <motion.span className="text-xl font-oswald font-bold text-white uppercase tracking-wide">
-                Dhruv Sheladiya
-              </motion.span>
+              <motion.div
+                className="h-0.5 w-full bg-red-600 shadow-[0_0_5px_#ff0000] mt-1"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
             </div>
           </motion.a>
 
@@ -188,7 +166,7 @@ const Navbar = () => {
                   key={link.id}
                   type="button"
                   onClick={() => handleLinkClick(link.id)}
-                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-widest font-oswald text-slate-300 hover:text-white transition-colors"
+                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-widest font-serif text-slate-300 hover:text-red-500 transition-colors"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
@@ -197,7 +175,7 @@ const Navbar = () => {
 
                   {/* Active/Hover Underline */}
                   <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-marvel-red transition-all duration-300 ${
+                    className={`absolute bottom-0 left-0 h-0.5 bg-red-600 shadow-[0_0_5px_#ff0000] transition-all duration-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -221,7 +199,7 @@ const Navbar = () => {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                 >
-                  <HiX size={28} className="text-marvel-red" />
+                  <HiX size={28} className="text-red-600" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -245,7 +223,7 @@ const Navbar = () => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-marvel-black border-t-2 border-marvel-red md:hidden"
+              className="bg-black border-t border-red-900 md:hidden"
             >
               <div className="flex flex-col p-6 space-y-4">
                 {navLinks.map((link, index) => {
@@ -254,8 +232,10 @@ const Navbar = () => {
                     <motion.button
                       key={link.id}
                       type="button"
-                      className={`text-left text-lg font-bold uppercase tracking-widest font-oswald ${
-                        isActive ? "text-marvel-red" : "text-white"
+                      className={`text-left text-lg font-bold uppercase tracking-widest font-serif ${
+                        isActive
+                          ? "text-red-500 drop-shadow-[0_0_5px_rgba(255,0,0,0.8)]"
+                          : "text-white"
                       }`}
                       onClick={() => handleLinkClick(link.id)}
                       initial={{ x: -20, opacity: 0 }}
