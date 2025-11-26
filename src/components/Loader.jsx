@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import bg1 from "../assets/bg1.jpg";
+import bg1 from "../assets/bg3.webp";
 import ParticlesBackground from "./ParticlesBackground";
 
 const Loader = ({ onComplete }) => {
@@ -23,7 +23,7 @@ const Loader = ({ onComplete }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black overflow-hidden"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/10 overflow-hidden"
       style={{
         backgroundImage: `url(${bg1})`,
         backgroundSize: "cover",

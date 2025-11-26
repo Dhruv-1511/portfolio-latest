@@ -297,7 +297,7 @@ const About = () => {
               ease: "easeInOut",
             }}
           />
-          <motion.div
+          {/* <motion.div
             className="absolute left-0 bottom-1/4 h-80 w-80 rounded-full blur-3xl opacity-8"
             style={{ background: "rgba(100, 100, 100, 0.4)" }}
             animate={{
@@ -310,7 +310,7 @@ const About = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-          />
+          /> */}
         </div>
       </div>
     </section>

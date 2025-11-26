@@ -48,7 +48,7 @@ const Projects = () => {
         </div>
 
         {/* Decorative Background Elements */}
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        {/* <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <motion.div
             className="absolute right-0 top-1/4 h-96 w-96 rounded-full blur-3xl opacity-10"
             style={{ background: "rgba(99, 102, 241, 0.4)" }}
@@ -77,7 +77,7 @@ const Projects = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );

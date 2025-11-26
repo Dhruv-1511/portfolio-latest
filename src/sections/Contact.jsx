@@ -30,6 +30,8 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   if (!personal || !socials || socials.length === 0) {
     return null;
@@ -40,11 +42,41 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
+    setIsLoading(true);
+    setError(false);
+    setSubmitted(false);
+
+    try {
+      // Use Netlify Function endpoint
+      // In production, this will be /.netlify/functions/send-mail
+      // In development with netlify dev, it will also work
+      const response = await fetch("/.netlify/functions/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(true);
+        setTimeout(() => setError(false), 5000);
+      }
+    } catch (err) {
+      console.error("Error sending email:", err);
+      setError(true);
+      setTimeout(() => setError(false), 5000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -111,13 +143,16 @@ const Contact = () => {
             </label>
             <motion.button
               type="submit"
+              disabled={isLoading}
               whileHover={{
-                scale: 1.08,
+                scale: isLoading ? 1 : 1.08,
                 boxShadow:
                   "0 0 40px rgba(255, 9, 9, 1), 0 0 80px rgba(255, 9, 9, 0.5), inset 0 0 20px rgba(255, 9, 9, 0.2)",
               }}
-              whileTap={{ scale: 0.92 }}
-              className="group relative mt-8 flex items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-red-600/90 bg-gradient-to-br from-black via-red-950/30 to-black px-10 py-4 text-sm font-bold uppercase tracking-[0.5em] text-red-500 shadow-[0_0_25px_rgba(255,9,9,0.6),inset_0_0_15px_rgba(255,9,9,0.1)] hover:border-red-500 hover:text-white transition-all duration-500 font-serif"
+              whileTap={{ scale: isLoading ? 1 : 0.92 }}
+              className={`group relative mt-8 flex items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-red-600/90 bg-gradient-to-br from-black via-red-950/30 to-black px-10 py-4 text-sm font-bold uppercase tracking-[0.5em] text-red-500 shadow-[0_0_25px_rgba(255,9,9,0.6),inset_0_0_15px_rgba(255,9,9,0.1)] hover:border-red-500 hover:text-white transition-all duration-500 font-serif ${
+                isLoading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
               style={{
                 textShadow:
                   "0 0 10px rgba(255, 9, 9, 0.8), 0 0 20px rgba(255, 9, 9, 0.6), 0 0 30px rgba(255, 9, 9, 0.4)",
@@ -152,7 +187,7 @@ const Contact = () => {
 
               {/* Button text with glow */}
               <span className="relative z-10 drop-shadow-[0_0_8px_rgba(255,0,0,1)] group-hover:drop-shadow-[0_0_15px_rgba(255,0,0,1)] transition-all duration-300">
-                Send Message
+                {isLoading ? "Sending..." : "Send Message"}
               </span>
 
               {/* Corner accents */}
@@ -165,9 +200,17 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: submitted ? 1 : 0, y: submitted ? 0 : 20 }}
-              className="mt-4 text-sm text-brand-300"
+              className="mt-4 text-sm text-green-400"
             >
-              Thanks! Your message has been captured.
+              ✅ Thanks! Your message has been sent successfully.
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: error ? 1 : 0, y: error ? 0 : 20 }}
+              className="mt-4 text-sm text-red-400"
+            >
+              ❌ Oops! Something went wrong. Please try again.
             </motion.div>
           </motion.form>
 

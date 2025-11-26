@@ -35,7 +35,7 @@ const Skills = () => {
                 className="group relative"
               >
                 <motion.div
-                  className="card-3d glass-card relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-950/80 p-6 shadow-xl transition-all duration-500"
+                  className="card-3d glass-card2 relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-950/80 p-6 shadow-xl transition-all duration-500"
                   whileHover={{ y: -4, scale: 1.02 }}
                 >
                   {/* Animated background gradient */}
@@ -189,7 +189,7 @@ const Skills = () => {
         </div>
 
         {/* Decorative background elements */}
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        {/* <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <motion.div
             className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full blur-3xl opacity-10"
             style={{ background: "rgba(99, 102, 241, 0.4)" }}
@@ -218,7 +218,7 @@ const Skills = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
